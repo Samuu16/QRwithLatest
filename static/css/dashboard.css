@@ -468,3 +468,32 @@ border-radius: 4px;
     border-radius: 5px; /* Rounded corners */
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Shadow effect */
 }
+
+
+
+.styled-button {
+  padding: 7px 10px;
+  margin: 7px;
+  border: none;
+  border-radius: 4px;
+  background-color: #007BFF;
+  color: #ffffff;
+  font-size: 15px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  text-decoration: none; /* Removes underline from the link */
+}
+
+.styled-button:hover {
+  background-color: #0056b3;
+}
+
+.styled-link {
+  color: #ffffff;
+  text-decoration: none; 
+ /* Ensures link text has no underline */
+}
+
+.styled-link:hover {
+  text-decoration: none; /* Adds underline on hover */
+}
