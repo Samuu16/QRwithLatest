@@ -382,7 +382,7 @@ def search_sensor_data():
             (LevelSensorData.date.like(f'%{query}%')) |
             (LevelSensorData.full_addr.like(f'%{query}%')) |
             (LevelSensorData.sensor_data.like(f'%{query}%')) |
-            (LevelSensorData.imei.like(f'%{query}%'))
+            (LevelSensorData.vehicleno.like(f'%{query}%'))
         ).paginate(page=page, per_page=10)
         sense_data = sense_data_pagination.items
     else:
@@ -416,6 +416,7 @@ def get_sensor_data():
         sensor_data = LevelSensorData.query.all()
         if not sensor_data:
             return jsonify(error='No data available'), 404
+        
 
         labels = [str(data.date) for data in sensor_data]
         sensor_values = [data.sensor_data for data in sensor_data]
