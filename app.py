@@ -8,6 +8,7 @@ import io
 from reportlab.lib.pagesizes import letter
 from reportlab.pdfgen import canvas
 from sqlalchemy import LargeBinary
+import sqlite3
 
 from flask import send_file
 from PIL import Image, ImageDraw, ImageFont
@@ -463,6 +464,31 @@ def generate_qr(id):
 def scan_qr(vehicleno):
     record = LevelSensorData.query.filter_by(vehicleno=vehicleno).first_or_404()
     return redirect(url_for('generate_pdf', id=record.id))
+
+
+
+
+
+
+#to update sensor table
+
+def get_new_data(last_id):
+    conn = sqlite3.connect('database.db')
+    cursor = conn.cursor()
+    cursor.execute("SELECT * FROM sensors WHERE id > ?", (last_id,))
+    new_data = cursor.fetchall()
+    conn.close()
+    return new_data
+
+@app.route('/fetch_new_data', methods=['GET'])
+def fetch_new_data():
+    last_id = int(request.args.get('last_id', 0))
+    new_data = get_new_data(last_id)
+    return jsonify(new_data)
+
+
+
+
 
 if __name__ == '__main__':
     
